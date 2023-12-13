@@ -1,4 +1,6 @@
-import 'package:atapp/screens/homescreen.dart';
+import 'dart:io';
+
+import 'package:atapp/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,9 +14,29 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Directionality(textDirection: TextDirection.rtl, child: HomePage()),
-    );
+    return Platform.isIOS
+        ? SafeArea(
+            child: MaterialApp(
+              color: accentColor,
+              theme: ThemeData(
+                  appBarTheme: const AppBarTheme(
+                      backgroundColor: MainApp.primaryColor,
+                      shadowColor: Colors.black26,
+                      foregroundColor: accentColor)),
+              debugShowCheckedModeBanner: false,
+              home: Directionality(
+                  textDirection: TextDirection.rtl, child: HomePage()),
+            ),
+          )
+        : MaterialApp(
+            color: accentColor,
+            theme: ThemeData(
+                appBarTheme: const AppBarTheme(
+                    backgroundColor: MainApp.primaryColor,
+                    shadowColor: Colors.black26,
+                    foregroundColor: accentColor)),
+            debugShowCheckedModeBanner: false,
+            home: Directionality(
+                textDirection: TextDirection.rtl, child: HomePage()));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:atapp/main.dart';
+import 'package:atapp/screens/itemsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -10,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  List<bool> isExpandedList = List.filled(3, false);
+  UniqueKey expansionKey = UniqueKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,13 +28,17 @@ class _HomePage extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
             child: ElevatedButton(
-              child: Text("ابدا الآن"),
-              onPressed: () {},
+              child: Text("ابدأ الآن"),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ItemsPage(),
+                    ));
+              },
             ),
           ),
         ],
-        backgroundColor: MainApp.primaryColor,
-        shadowColor: Colors.transparent,
       ),
       body: SingleChildScrollView(
           child: Column(
@@ -60,7 +67,14 @@ class _HomePage extends State<HomePage> {
                     FractionallySizedBox(
                         widthFactor: 0.5,
                         child: ElevatedButton(
-                            onPressed: () {}, child: Text("ابدأ الآن")))
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ItemsPage(),
+                                  ));
+                            },
+                            child: Text("ابدأ الآن")))
                   ]),
             ),
           ),
@@ -287,89 +301,172 @@ class _HomePage extends State<HomePage> {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(20),
-              color: Color.fromRGBO(220, 229, 240, 1),
-              width: double.infinity,
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                child: Container(
-                  color: Colors.white,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 30),
-                            child: Text(
-                              "أنت تستحق أن تكون سعيدا!",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 50),
+              child: Container(
+                padding: EdgeInsets.all(30),
+                color: Color.fromRGBO(220, 229, 240, 1),
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  child: Container(
+                    color: Colors.white,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 30),
+                              child: Text(
+                                "أنت تستحق أن تكون سعيدا!",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "ادخل معلوماتك",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text("لمساعدتنا في اختيار الاخصائي المناسب لك"),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                "اختر الاشتراك المناسب",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text("اسبوعي, شهري, كل 3 أشهر"),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                "ادفع بأمان",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text("طرق دفع آمنة"),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                "نحن بخدمتك 24 ساعة",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                  "سيتواصل فريق خدمة العملاء معك لتحديد المختص الأنسب لحالتك"),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                "ابدأ العلاج",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Text("حدد موعد مع المختص الخاص بك"),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Center(
-                                  child: FractionallySizedBox(
-                                    widthFactor: 0.8,
-                                    child: ElevatedButton(
-                                        onPressed: () {},
-                                        child: Text("ابدأ الآن")),
-                                  ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "ادخل معلوماتك",
+                                  style: TextStyle(fontSize: 20),
                                 ),
-                              )
-                            ],
-                          ),
-                        )
-                      ]),
+                                Text("لمساعدتنا في اختيار الاخصائي المناسب لك"),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Text(
+                                  "اختر الاشتراك المناسب",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text("اسبوعي, شهري, كل 3 أشهر"),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Text(
+                                  "ادفع بأمان",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text("طرق دفع آمنة"),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Text(
+                                  "نحن بخدمتك 24 ساعة",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text(
+                                    "سيتواصل فريق خدمة العملاء معك لتحديد المختص الأنسب لحالتك"),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Text(
+                                  "ابدأ العلاج",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text("حدد موعد مع المختص الخاص بك"),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Center(
+                                    child: FractionallySizedBox(
+                                      widthFactor: 0.8,
+                                      child: ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ItemsPage(),
+                                                ));
+                                          },
+                                          child: Text("ابدأ الآن")),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ]),
+                  ),
                 ),
+              ),
+            ),
+            Center(
+              child: Text(
+                "أسئلة شائعة",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(30),
+              child: ExpansionPanelList(
+                materialGapSize: 20,
+                expansionCallback: (panelIndex, isExpanded) => setState(() {
+                  isExpandedList[panelIndex] = !isExpandedList[panelIndex];
+                }),
+                expandedHeaderPadding: EdgeInsets.all(15),
+                children: [
+                  ExpansionPanel(
+                      isExpanded: isExpandedList[0],
+                      backgroundColor: Color.fromRGBO(242, 247, 252, 1),
+                      canTapOnHeader: true,
+                      headerBuilder: (context, isExpanded) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("كم مدة الجلسات؟"),
+                          ),
+                      body: Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "- الجواب",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      )),
+                  ExpansionPanel(
+                      isExpanded: isExpandedList[1],
+                      backgroundColor: Color.fromRGBO(242, 247, 252, 1),
+                      canTapOnHeader: true,
+                      headerBuilder: (context, isExpanded) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                                "هل يمكنني الغاء الاشتراك بعد الجلسة الاولى؟"),
+                          ),
+                      body: Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "- الجواب",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      )),
+                  ExpansionPanel(
+                      isExpanded: isExpandedList[2],
+                      backgroundColor: Color.fromRGBO(242, 247, 252, 1),
+                      canTapOnHeader: true,
+                      headerBuilder: (context, isExpanded) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("كم سعر الجلسات في الاشتراك الاسبوعي؟"),
+                          ),
+                      body: Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            "- الجواب",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      )),
+                ],
               ),
             )
           ])
